@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>内容概览 - AI对未来工作的影响</title>
+  <style>
+    :root {
+      --slide-width: 1280px;
+      --slide-height: 720px;
+      --color-bg: #FAF8F5;
+      --color-grid: #E5E5E5;
+      --color-text-primary: #334155;
+      --color-accent-primary: #2563EB;
+      --color-accent-secondary: #1E3A5F;
+      --color-accent-tertiary: #BFDBFE;
+      --font-headline: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: Georgia, serif;
+      --spacing-md: 24px;
+      --spacing-lg: 48px;
+      --spacing-xl: 64px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e0e0e0;
+    }
+    
+    .slide {
+      width: var(--slide-width);
+      height: var(--slide-height);
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+      padding: var(--spacing-xl);
+    }
+    
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--color-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    .layout-grid-four {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .title {
+      font-family: var(--font-headline);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+      flex: 1;
+      padding: 0 40px;
+    }
+    
+    .grid-item {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--color-grid);
+      border-radius: 8px;
+      padding: var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .grid-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .item-number {
+      font-family: var(--font-headline);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-accent-primary);
+      opacity: 0.8;
+      min-width: 60px;
+    }
+    
+    .item-content {
+      flex: 1;
+    }
+    
+    .item-title {
+      font-family: var(--font-headline);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    
+    .item-desc {
+      font-size: 16px;
+      color: var(--color-accent-secondary);
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="layout-grid-four">
+      <div class="header">
+        <h1 class="title">内容概览</h1>
+      </div>
+      
+      <div class="grid">
+        <div class="grid-item">
+          <span class="item-number">01</span>
+          <div class="item-content">
+            <h3 class="item-title">自动化的崛起</h3>
+            <p class="item-desc">技术驱动力与当前进展</p>
+          </div>
+        </div>
+        
+        <div class="grid-item">
+          <span class="item-number">02</span>
+          <div class="item-content">
+            <h3 class="item-title">工作岗位的变迁</h3>
+            <p class="item-desc">影响范围与行业分布</p>
+          </div>
+        </div>
+        
+        <div class="grid-item">
+          <span class="item-number">03</span>
+          <div class="item-content">
+            <h3 class="item-title">新兴职业机会</h3>
+            <p class="item-desc">AI时代的新工作类型</p>
+          </div>
+        </div>
+        
+        <div class="grid-item">
+          <span class="item-number">04</span>
+          <div class="item-content">
+            <h3 class="item-title">技能再培训策略</h3>
+            <p class="item-desc">未来工作的核心竞争力</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

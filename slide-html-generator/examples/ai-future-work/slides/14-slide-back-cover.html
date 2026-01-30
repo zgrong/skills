@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>谢谢观看 - AI对未来工作的影响</title>
+  <style>
+    :root {
+      --slide-width: 1280px;
+      --slide-height: 720px;
+      --color-bg: #FAF8F5;
+      --color-grid: #E5E5E5;
+      --color-text-primary: #334155;
+      --color-accent-primary: #2563EB;
+      --color-accent-secondary: #1E3A5F;
+      --font-headline: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: Georgia, serif;
+      --spacing-md: 24px;
+      --spacing-lg: 48px;
+      --spacing-xl: 64px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e0e0e0;
+    }
+    
+    .slide {
+      width: var(--slide-width);
+      height: var(--slide-height);
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+      padding: var(--spacing-xl);
+    }
+    
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--color-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    .layout-centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .title {
+      font-family: var(--font-headline);
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    
+    .subtitle {
+      font-family: var(--font-headline);
+      font-size: 28px;
+      color: var(--color-accent-secondary);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .closing-message {
+      font-size: 22px;
+      color: var(--color-accent-secondary);
+      font-style: italic;
+      max-width: 700px;
+      line-height: 1.6;
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 2px solid var(--color-accent-primary);
+    }
+    
+    .decorative-lines {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+    }
+    
+    .deco-line {
+      width: 40px;
+      height: 3px;
+      background: var(--color-accent-primary);
+      opacity: 0.6;
+    }
+    
+    .corner-element {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--color-accent-primary);
+      opacity: 0.2;
+    }
+    
+    .corner-element--tl {
+      top: 30px;
+      left: 30px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    .corner-element--tr {
+      top: 30px;
+      right: 30px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    .corner-element--bl {
+      bottom: 30px;
+      left: 30px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    .corner-element--br {
+      bottom: 30px;
+      right: 30px;
+      border-left: none;
+      border-top: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="corner-element corner-element--tl"></div>
+    <div class="corner-element corner-element--tr"></div>
+    <div class="corner-element corner-element--bl"></div>
+    <div class="corner-element corner-element--br"></div>
+    
+    <div class="layout-centered">
+      <h1 class="title">谢谢观看</h1>
+      <p class="subtitle">THANK YOU</p>
+      <p class="closing-message">
+        人工智能不是未来的遥远愿景，而是正在发生的现实。<br>
+        准备好了吗？
+      </p>
+    </div>
+    
+    <div class="decorative-lines">
+      <div class="deco-line"></div>
+      <div class="deco-line"></div>
+      <div class="deco-line"></div>
+    </div>
+  </div>
+</body>
+</html>

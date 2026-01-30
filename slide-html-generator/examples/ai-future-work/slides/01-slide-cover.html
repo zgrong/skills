@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>封面 - AI对未来工作的影响</title>
+  <style>
+    :root {
+      --slide-width: 1280px;
+      --slide-height: 720px;
+      --color-bg: #FAF8F5;
+      --color-grid: #E5E5E5;
+      --color-text-primary: #334155;
+      --color-accent-primary: #2563EB;
+      --color-accent-secondary: #1E3A5F;
+      --color-accent-tertiary: #BFDBFE;
+      --font-headline: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: Georgia, 'Times New Roman', serif;
+      --spacing-md: 24px;
+      --spacing-lg: 48px;
+      --spacing-xl: 64px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e0e0e0;
+    }
+    
+    .slide {
+      width: var(--slide-width);
+      height: var(--slide-height);
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+      padding: var(--spacing-xl);
+    }
+    
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--color-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    .layout-title-hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .title {
+      font-family: var(--font-headline);
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-md);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      font-size: 28px;
+      color: var(--color-accent-secondary);
+      max-width: 800px;
+      line-height: 1.4;
+    }
+    
+    .visual-accent {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 16px;
+      opacity: 0.6;
+    }
+    
+    .accent-line {
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent-primary);
+    }
+    
+    .corner-accent {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 2px solid var(--color-accent-primary);
+      opacity: 0.3;
+    }
+    
+    .corner-accent--tl {
+      top: 40px;
+      left: 40px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    .corner-accent--br {
+      bottom: 40px;
+      right: 40px;
+      border-left: none;
+      border-top: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="corner-accent corner-accent--tl"></div>
+    <div class="corner-accent corner-accent--br"></div>
+    
+    <div class="layout-title-hero">
+      <h1 class="title">人工智能对未来工作的影响</h1>
+      <p class="subtitle">自动化浪潮下的劳动力市场重构</p>
+    </div>
+    
+    <div class="visual-accent">
+      <div class="accent-line"></div>
+      <div class="accent-line"></div>
+      <div class="accent-line"></div>
+    </div>
+  </div>
+</body>
+</html>
