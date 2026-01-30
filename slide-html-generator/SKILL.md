@@ -26,7 +26,7 @@ Transform a topic into professional slide deck HTML files.
 2. Agent collects information via web search
 3. Agent analyzes content and recommends style/slides
 4. Agent generates outline with STYLE_INSTRUCTIONS
-5. Agent generates HTML slides (1280x720)
+5. Agent generates HTML slides (1280x720) - **MUST complete this step!**
 
 ## Workflow
 
@@ -38,10 +38,11 @@ Slide HTML Progress:
 - [ ] Step 2: Content Analysis
 - [ ] Step 3: User Confirmation (optional)
 - [ ] Step 4: Generate Outline
-- [ ] Step 5: Generate Slide Scripts
-- [ ] Step 6: Generate HTML Slides
-- [ ] Step 7: Output Summary
+- [ ] Step 5: Generate HTML Slides (REQUIRED - directly from outline)
+- [ ] Step 6: Output Summary
 ```
+
+**IMPORTANT**: Step 5 is MANDATORY. You MUST generate actual HTML slides in `slides/*.html`. The task is NOT complete until all HTML files are created.
 
 ### Step 1: Information Gathering
 
@@ -160,38 +161,29 @@ Options:
 
 **Output**: `slide-deck/{topic-slug}/outline.md`
 
-### Step 5: Generate Slide Scripts
+### Step 5: Generate HTML Slides (MANDATORY)
 
-**Purpose**: Create detailed script for each slide.
+**Purpose**: Generate 1280x720 HTML for each slide directly from outline.
 
-**Actions**:
-
-1. For each slide in outline:
-   - Extract slide type, title, key points
-   - Add visual description
-   - Define layout
-2. Save to `prompts/{NN}-slide-{slug}.md`
-
-**Output**: `slide-deck/{topic-slug}/prompts/*.md`
-
-### Step 6: Generate HTML Slides
-
-**Purpose**: Generate 1280x720 HTML for each slide.
+**⚠️ CRITICAL**: This step is MANDATORY. The entire task is NOT complete until all HTML files are created. Do NOT stop after generating the outline.
 
 **Actions**:
 
-1. Read STYLE_INSTRUCTIONS from outline
-2. For each prompt file:
-   - Parse slide content
-   - Apply style variables
-   - Generate complete HTML with CSS
-3. Save to `slides/{NN}-slide-{slug}.html`
+1. Read STYLE_INSTRUCTIONS from outline.md
+2. For EACH slide defined in outline:
+   - Extract slide type, title, key points, and visual description
+   - Apply style variables from STYLE_INSTRUCTIONS
+   - Generate complete self-contained HTML with inline CSS
+   - Use proper layout based on content type
+3. Save each slide to `slides/{NN}-slide-{slug}.html`
 
 **Reference**: See `references/html-template.md` for HTML structure.
 
-**Output**: `slide-deck/{topic-slug}/slides/*.html`
+**Output**: `slide-deck/{topic-slug}/slides/*.html` (ALL slides must be generated)
 
-### Step 7: Output Summary
+**Verification**: Count the number of HTML files generated - it MUST match the slide count in outline.md.
+
+### Step 6: Output Summary
 
 **Purpose**: Summarize generated files and provide preview.
 
@@ -221,6 +213,7 @@ Example with network URLs:
 ```
 
 **Rationale**: Network URLs enable:
+
 - Cross-origin resource sharing
 - CDN caching
 - Easier deployment and sharing
@@ -235,17 +228,17 @@ Topic: {topic}
 Style: {preset}
 Location: slide-deck/{topic-slug}/
 
-Files:
-├── source.md
-├── analysis.md
-├── outline.md
-├── prompts/
-│   ├── 01-slide-cover.md
-│   └── ... ({N} files)
-├── slides/
+Generated Files:
+├── source.md (information)
+├── analysis.md (analysis)
+├── outline.md (structure)
+├── slides/ ({N} HTML files) ← REQUIRED
 │   ├── 01-slide-cover.html
-│   └── ... ({N} files)
+│   ├── 02-slide-contents.html
+│   └── ... ({N} total files)
 └── index.html (preview)
+
+✓ All {N} HTML slides successfully generated
 ```
 
 ## Output Directory Structure
@@ -255,16 +248,14 @@ slide-deck/{topic-slug}/
 ├── source.md           # Collected information
 ├── analysis.md         # Analysis configuration
 ├── outline.md          # Outline with STYLE_INSTRUCTIONS
-├── prompts/            # Slide scripts
-│   ├── 01-slide-cover.md
-│   ├── 02-slide-contents.md
-│   └── ...
-├── slides/             # HTML slides (1280x720)
+├── slides/             # HTML slides (1280x720) - REQUIRED OUTPUT
 │   ├── 01-slide-cover.html
 │   ├── 02-slide-contents.html
 │   └── ...
 └── index.html          # Preview page
 ```
+
+**Note**: The `prompts/` directory has been removed from the workflow to streamline generation. HTML slides are now created directly from `outline.md`.
 
 ## Style System
 
@@ -311,8 +302,9 @@ Full specifications in `references/styles/{preset}.md`:
 write({ filePath: "source.md", content: "文件内容..." })
 write({ filePath: "analysis.md", content: "分析内容..." })
 write({ filePath: "outline.md", content: "大纲内容..." })
-write({ filePath: "prompts/01-slide-cover.md", content: "提示词内容..." })
-write({ filePath: "slides/01-slide-cover.html", content: "HTML内容..." })
+write({ filePath: "slides/01-slide-cover.html", content: "HTML内容..." })  # REQUIRED
+write({ filePath: "slides/02-slide-contents.html", content: "HTML内容..." })  # REQUIRED
+# ... continue for ALL slides
 ```
 
 **参数说明**：
@@ -326,8 +318,8 @@ write({ filePath: "slides/01-slide-cover.html", content: "HTML内容..." })
 
 ```
 read({ filePath: "/home/user/app/outline.md" })
-read({ filePath: "/home/user/app/prompts/01-slide-cover.md" })
 read({ filePath: "/home/user/app/source.md", offset: 0, limit: 100 })  # 读取前100行
+read({ filePath: "/home/user/app/slides/01-slide-cover.html" })
 ```
 
 **参数说明**：
