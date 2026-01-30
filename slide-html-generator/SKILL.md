@@ -48,17 +48,18 @@ Slide HTML Progress:
 **Purpose**: Collect comprehensive information about the topic.
 
 **Actions**:
+
 1. Parse topic keywords (both Chinese and English)
 2. Execute multiple web searches
 3. Organize results into structured content
 4. Save to `source.md`
 
-```bash
+```
 # Example web searches for "AI对未来工作的影响"
-web_search "人工智能 未来工作 自动化 影响"
-web_search "AI job displacement statistics 2024"
-web_search "reskilling workforce AI era"
-web_search "新兴AI职业 2024"
+web_search({ query: "人工智能 未来工作 自动化 影响" })
+web_search({ query: "AI job displacement statistics 2024" })
+web_search({ query: "reskilling workforce AI era" })
+web_search({ query: "新兴AI职业 2024" })
 ```
 
 **Output**: `slide-deck/{topic-slug}/source.md`
@@ -67,6 +68,7 @@ web_search "新兴AI职业 2024"
 # Source: {Topic}
 
 ## Search Keywords
+
 - [keyword 1]
 - [keyword 2]
 - ...
@@ -74,11 +76,13 @@ web_search "新兴AI职业 2024"
 ## Collected Information
 
 ### Section 1
+
 - Key point 1
 - Key point 2
 - Statistics and data
 
 ### Section 2
+
 ...
 ```
 
@@ -87,6 +91,7 @@ web_search "新兴AI职业 2024"
 **Purpose**: Analyze collected content and recommend presentation structure.
 
 **Actions**:
+
 1. Extract core messages
 2. Identify target audience
 3. Map visual opportunities
@@ -100,29 +105,23 @@ web_search "新兴AI职业 2024"
 ```markdown
 # Analysis: {Topic}
 
-**Topic:** {Full topic description}
-**Slug:** {topic-slug}
-**Language:** {zh/en}
-**Style:** {recommended preset}
-**Audience:** {target audience}
-**Slide Count:** {N-M}
+**Topic:** {Full topic description} **Slug:** {topic-slug} **Language:** {zh/en} **Style:** {recommended preset} **Audience:** {target audience} **Slide Count:** {N-M}
 
 ## Core Messages
+
 1. [Main takeaway 1]
-2. [Main takeaway 2]
-...
+2. [Main takeaway 2] ...
 
 ## Content Themes
+
 - [Theme 1]
-- [Theme 2]
-...
+- [Theme 2] ...
 
 ## Recommended Structure
+
 1. Cover
 2. Contents
-3. [Content sections]
-...
-N. Back Cover
+3. [Content sections] ... N. Back Cover
 ```
 
 ### Step 3: User Confirmation (Optional)
@@ -130,6 +129,7 @@ N. Back Cover
 **Purpose**: Confirm style, slides, and audience with user.
 
 **Display**:
+
 ```
 📊 Analysis Complete
 
@@ -150,6 +150,7 @@ Options:
 **Purpose**: Create detailed outline with STYLE_INSTRUCTIONS.
 
 **Actions**:
+
 1. Read style definition from `references/styles/{preset}.md`
 2. Build STYLE_INSTRUCTIONS block
 3. Define each slide structure
@@ -164,6 +165,7 @@ Options:
 **Purpose**: Create detailed script for each slide.
 
 **Actions**:
+
 1. For each slide in outline:
    - Extract slide type, title, key points
    - Add visual description
@@ -177,6 +179,7 @@ Options:
 **Purpose**: Generate 1280x720 HTML for each slide.
 
 **Actions**:
+
 1. Read STYLE_INSTRUCTIONS from outline
 2. For each prompt file:
    - Parse slide content
@@ -193,11 +196,38 @@ Options:
 **Purpose**: Summarize generated files and provide preview.
 
 **Actions**:
+
 1. Generate `index.html` for preview
 2. List all generated files
 3. Report completion
 
+**Index.html URL Strategy**:
+
+When generating `index.html`, prioritize network URLs over relative paths:
+
+- **If files are hosted**: Use full URLs (e.g., `https://example.com/slides/02-slide-concept.html`)
+- **If files are local**: Use relative paths (e.g., `slides/02-slide-concept.html`)
+
+Example with network URLs:
+
+```html
+<div class="slide-card" onclick="window.open('https://example.com/slides/02-slide-concept.html', '_blank')">
+  <iframe src="https://example.com/slides/02-slide-concept.html" class="slide-preview" scrolling="no"></iframe>
+  <div class="slide-info">
+    <div class="slide-number">幻灯片 02</div>
+    <div class="slide-title">什么是Vibe Coding</div>
+  </div>
+</div>
+```
+
+**Rationale**: Network URLs enable:
+- Cross-origin resource sharing
+- CDN caching
+- Easier deployment and sharing
+- No path resolution issues
+
 **Output**:
+
 ```
 ✅ Slide Deck Complete!
 
@@ -240,28 +270,29 @@ slide-deck/{topic-slug}/
 
 ### Presets
 
-| Preset | Characteristics | Best For |
-|--------|-----------------|----------|
-| `blueprint` | Grid texture, technical lines, cool blue | Architecture, system design, technical docs |
-| `minimal` | Clean white, geometric, lots of whitespace | Executive briefings, summaries |
-| `corporate` | Professional navy/gold, balanced density | Investor decks, business proposals |
-| `sketch-notes` | Hand-drawn feel, warm colors, organic | Education, tutorials, training |
-| `dark-atmospheric` | Deep backgrounds, cinematic, glowing accents | Entertainment, gaming, product launches |
+| Preset             | Characteristics                              | Best For                                    |
+| ------------------ | -------------------------------------------- | ------------------------------------------- |
+| `blueprint`        | Grid texture, technical lines, cool blue     | Architecture, system design, technical docs |
+| `minimal`          | Clean white, geometric, lots of whitespace   | Executive briefings, summaries              |
+| `corporate`        | Professional navy/gold, balanced density     | Investor decks, business proposals          |
+| `sketch-notes`     | Hand-drawn feel, warm colors, organic        | Education, tutorials, training              |
+| `dark-atmospheric` | Deep backgrounds, cinematic, glowing accents | Entertainment, gaming, product launches     |
 
 ### Auto Style Selection
 
-| Content Signals | Preset |
-|-----------------|--------|
-| technical, architecture, system, data, analysis | `blueprint` |
-| executive, briefing, summary, minimal | `minimal` |
-| business, investor, corporate, quarterly | `corporate` |
-| education, tutorial, learn, training | `sketch-notes` |
-| entertainment, gaming, launch, product | `dark-atmospheric` |
-| Default | `blueprint` |
+| Content Signals                                 | Preset             |
+| ----------------------------------------------- | ------------------ |
+| technical, architecture, system, data, analysis | `blueprint`        |
+| executive, briefing, summary, minimal           | `minimal`          |
+| business, investor, corporate, quarterly        | `corporate`        |
+| education, tutorial, learn, training            | `sketch-notes`     |
+| entertainment, gaming, launch, product          | `dark-atmospheric` |
+| Default                                         | `blueprint`        |
 
 ### Style Specifications
 
 Full specifications in `references/styles/{preset}.md`:
+
 - Design aesthetic description
 - Background texture and color
 - Typography (visual descriptions, not font names)
@@ -274,31 +305,43 @@ Full specifications in `references/styles/{preset}.md`:
 
 ### write
 
-Create and save files:
+创建并保存文件：
 
-```bash
-write source.md [content]
-write analysis.md [content]
-write outline.md [content]
-write prompts/01-slide-cover.md [content]
-write slides/01-slide-cover.html [content]
 ```
+write({ filePath: "source.md", content: "文件内容..." })
+write({ filePath: "analysis.md", content: "分析内容..." })
+write({ filePath: "outline.md", content: "大纲内容..." })
+write({ filePath: "prompts/01-slide-cover.md", content: "提示词内容..." })
+write({ filePath: "slides/01-slide-cover.html", content: "HTML内容..." })
+```
+
+**参数说明**：
+
+- `filePath`: 文件路径（相对路径会自动添加 `/home/user/app/` 前缀）
+- `content`: 文件内容（字符串）
 
 ### read
 
-Read existing files:
+读取现有文件：
 
-```bash
-read outline.md
-read prompts/01-slide-cover.md
+```
+read({ filePath: "/home/user/app/outline.md" })
+read({ filePath: "/home/user/app/prompts/01-slide-cover.md" })
+read({ filePath: "/home/user/app/source.md", offset: 0, limit: 100 })  # 读取前100行
 ```
 
-### command / web_search
+**参数说明**：
 
-Execute web searches:
+- `filePath`: 文件路径（必须是绝对路径，相对路径会自动添加 `/home/user/app/` 前缀）
+- `offset`: 可选，起始行号（0-based，默认从开头读取）
+- `limit`: 可选，读取的行数（默认 2000 行）
 
-```bash
-web_search "search query"
+### web_search
+
+联网搜索工具，查询实时信息：
+
+```
+web_search({ query: "搜索关键词" })
 ```
 
 ### run_code
@@ -312,12 +355,12 @@ python scripts/generate-html.py
 
 ## Slide Count Guidelines
 
-| Content Length | Recommended Slides |
-|----------------|-------------------|
-| Brief topic | 5-8 |
-| Standard topic | 10-14 |
-| Comprehensive topic | 15-20 |
-| Extensive topic | 20-25 (consider splitting) |
+| Content Length      | Recommended Slides         |
+| ------------------- | -------------------------- |
+| Brief topic         | 5-8                        |
+| Standard topic      | 10-14                      |
+| Comprehensive topic | 15-20                      |
+| Extensive topic     | 20-25 (consider splitting) |
 
 ## Language Handling
 
@@ -327,13 +370,13 @@ python scripts/generate-html.py
 
 ## References
 
-| File | Content |
-|------|---------|
+| File                               | Content                      |
+| ---------------------------------- | ---------------------------- |
 | `references/analysis-framework.md` | Content analysis methodology |
-| `references/outline-template.md` | Outline structure and format |
-| `references/html-template.md` | HTML generation template |
-| `references/layouts.md` | Layout options |
-| `references/styles/*.md` | Style preset definitions |
+| `references/outline-template.md`   | Outline structure and format |
+| `references/html-template.md`      | HTML generation template     |
+| `references/layouts.md`            | Layout options               |
+| `references/styles/*.md`           | Style preset definitions     |
 
 ## Notes
 
@@ -342,3 +385,4 @@ python scripts/generate-html.py
 - Use CSS variables for consistent theming
 - Maintain visual hierarchy and whitespace
 - One clear message per slide
+- **URL Strategy**: When generating index.html, prioritize network URLs (e.g., `https://example.com/slides/01-slide.html`) over relative paths for better deployment and sharing. Use relative paths only when files are purely local.
