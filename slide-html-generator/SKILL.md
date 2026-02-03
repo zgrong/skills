@@ -309,7 +309,7 @@ write({ filePath: "slides/02-slide-contents.html", content: "HTML内容..." })  
 
 **参数说明**：
 
-- `filePath`: 文件路径（相对路径会自动添加 `/home/user/app/` 前缀）
+- `filePath`: 文件路径（相对路径会自动添加 `{workDirectory}` 前缀）
 - `content`: 文件内容（字符串）
 
 ### read
@@ -317,14 +317,14 @@ write({ filePath: "slides/02-slide-contents.html", content: "HTML内容..." })  
 读取现有文件：
 
 ```
-read({ filePath: "/home/user/app/outline.md" })
-read({ filePath: "/home/user/app/source.md", offset: 0, limit: 100 })  # 读取前100行
-read({ filePath: "/home/user/app/slides/01-slide-cover.html" })
+read({ filePath: "{workDirectory}/outline.md" })
+read({ filePath: "{workDirectory}/source.md", offset: 0, limit: 100 })  # 读取前100行
+read({ filePath: "{workDirectory}/slides/01-slide-cover.html" })
 ```
 
 **参数说明**：
 
-- `filePath`: 文件路径（必须是绝对路径，相对路径会自动添加 `/home/user/app/` 前缀）
+- `filePath`: 文件路径（必须是绝对路径，相对路径会自动添加 `{workDirectory}` 前缀）
 - `offset`: 可选，起始行号（0-based，默认从开头读取）
 - `limit`: 可选，读取的行数（默认 2000 行）
 
